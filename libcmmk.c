@@ -37,9 +37,11 @@ typedef int16_t keyboard_layout[CMMK_ROWS_MAX][CMMK_COLS_MAX];
 static keyboard_layout const *keyboard_layouts[] = {
 	[CMMK_LAYOUT_US_S] = &layout_us_s,
 	[CMMK_LAYOUT_US_L] = &layout_us_l,
+	[CMMK_LAYOUT_US_MK730] = &layout_us_mk730,
 	[CMMK_LAYOUT_US_MK750] = &layout_us_mk750,
 	[CMMK_LAYOUT_EU_S] = &layout_eu_s,
 	[CMMK_LAYOUT_EU_L] = &layout_eu_l,
+	[CMMK_LAYOUT_EU_MK730] = &layout_eu_mk730,
 	[CMMK_LAYOUT_EU_MK750] = &layout_eu_mk750,
 };
 
@@ -192,7 +194,8 @@ int cmmk_find_device(int *product)
 	static int supported_devices[] = {
 		CMMK_USB_MASTERKEYS_PRO_L,
 		CMMK_USB_MASTERKEYS_PRO_S,
-		CMMK_USB_MASTERKEYS_MK750
+		CMMK_USB_MASTERKEYS_MK750,
+		CMMK_USB_MASTERKEYS_MK730,
 	};
 
 	libusb_context *context = NULL;
@@ -263,6 +266,7 @@ static int cmmk_try_determine_layout(struct cmmk *state, int product)
 	switch (product) {
 		case CMMK_USB_MASTERKEYS_PRO_L: device_model = CMMK_PRODUCT_MASTERKEYS_PRO_L; break;
 		case CMMK_USB_MASTERKEYS_PRO_S: device_model = CMMK_PRODUCT_MASTERKEYS_PRO_S; break;
+		case CMMK_USB_MASTERKEYS_MK730: device_model = CMMK_PRODUCT_MASTERKEYS_MK730; break;
 		case CMMK_USB_MASTERKEYS_MK750: device_model = CMMK_PRODUCT_MASTERKEYS_MK750; break;
 	}
 
@@ -270,12 +274,14 @@ static int cmmk_try_determine_layout(struct cmmk *state, int product)
 		switch (device_model) {
 			case CMMK_PRODUCT_MASTERKEYS_PRO_L: return CMMK_LAYOUT_US_L;
 			case CMMK_PRODUCT_MASTERKEYS_PRO_S: return CMMK_LAYOUT_US_S;
+			case CMMK_PRODUCT_MASTERKEYS_MK730: return CMMK_LAYOUT_US_MK730;
 			case CMMK_PRODUCT_MASTERKEYS_MK750: return CMMK_LAYOUT_US_MK750;
 		}
 	} else {
 		switch (device_model) {
 			case CMMK_PRODUCT_MASTERKEYS_PRO_L: return CMMK_LAYOUT_EU_L;
 			case CMMK_PRODUCT_MASTERKEYS_PRO_S: return CMMK_LAYOUT_EU_S;
+			case CMMK_PRODUCT_MASTERKEYS_MK730: return CMMK_LAYOUT_EU_MK730;
 			case CMMK_PRODUCT_MASTERKEYS_MK750: return CMMK_LAYOUT_EU_MK750;
 		}
 	}
@@ -379,6 +385,11 @@ int cmmk_force_layout(struct cmmk *state, int layout)
 		state->layout_type = CMMK_LAYOUT_TYPE_ANSI;
 		break;
 
+	case CMMK_LAYOUT_US_MK730:
+		state->product_type = CMMK_PRODUCT_MASTERKEYS_MK730;
+		state->layout_type = CMMK_LAYOUT_TYPE_ANSI;
+		break;
+
 	case CMMK_LAYOUT_US_MK750:
 		state->product_type = CMMK_PRODUCT_MASTERKEYS_MK750;
 		state->layout_type = CMMK_LAYOUT_TYPE_ANSI;
@@ -391,6 +402,11 @@ int cmmk_force_layout(struct cmmk *state, int layout)
 
 	case CMMK_LAYOUT_EU_L:
 		state->product_type = CMMK_PRODUCT_MASTERKEYS_PRO_L;
+		state->layout_type = CMMK_LAYOUT_TYPE_ISO;
+		break;
+
+	case CMMK_LAYOUT_EU_MK730:
+		state->product_type = CMMK_PRODUCT_MASTERKEYS_MK730;
 		state->layout_type = CMMK_LAYOUT_TYPE_ISO;
 		break;
 

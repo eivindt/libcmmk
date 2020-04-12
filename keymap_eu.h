@@ -48,6 +48,36 @@ static keyboard_layout layout_eu_l = {
 	{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 };
 
+static keyboard_layout layout_eu_mk730 = {
+	/*
+	ESC        F1    F2   F3    F4    XXX   F5    F6    F7    F8   XXX   F9    F10   F11   F12   PRN   SCL   PAU   XXX   XXX   XXX   XXX   */
+	{ 7,       28,   35,  42,   49,  -1,    63,   70,   77,   84, -1,    91,   98,   105,  112,   119, 126,  133,  -1,  -1,  -1,  -1},
+
+	/*
+	^     1     2     3     4     5     6     7    8     9     0          ß     ´     XXX   BCK   INS   HOM   PUP   XXX   XXX  XXX   XXX */
+	{8,  22,    29,  36,   43,   50,   57,   64,  71,   78,   85,        92,   99,   -1,   113,   120,  127,  134,   -1,   -1,   -1,   -1},
+
+	/*
+	TAB   Q     W     E     R     T    Z/Y   U     I     O     P         Ü/[   +/]   XXX   ENT   DEL   END   PDN   XXX  XXX   XXX   XXX    */
+	{9,  23,    30,  37,   44,   51,   58,  27,   72,   79,   86,        100,   100,   -1,   115,  121,  128,  135,   -1,   -1,   -1,   -1},
+
+	/*
+t 	CAP   A     S     D     F     G     H     J    K     L     Ö/;       Ä/'   #/C42 XXX   XXX   XXX   XXX   XXX   XXX   XXX   XXX   XXX   */
+	{10,  24,  31,   38,   45,   52,   59,   66,  73,   80,   87,        101,   108,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1},
+
+	/*
+  LSHFT </C45 Y/Z   X     C     V     B     N     M    ,     .     -//   XXX   XXX   RSHFT XXX   UP    XXX  XXX   XXX   XXX   XXX */
+    {11,  18,  25, 32,   39,   46,   53,   60,   31,  74,   81,   88,   -1,   -1,    116,   -1,   130,   -1,  -1,   -1,   -1,    -1},
+
+	/*
+  LCTRL LWIN  LALT XXX  XXX  XXX   SPACE  XXX   XXX   XXX  RALT              RWIN  FN    XXX   RCTRL LEFT  DOWN  RIGHT XXX   XXX   XXX   XXX    */
+    {12,  19,   26, -1,  -1,  -1,     54,  -1,   -1,   -1,  82,               89,   96,   -1,   117,   124,   131,  138,   -1,   -1,   -1,   -1},
+
+	/*
+	XXX   LED1  LED2  LED3  LED4  XXX   LED6  LED7  LED8  LED9  LED10 LED11 LED12 LED13 LED14 LED15 LED16   LED17 LED18 LED19 LED20 XXX  LED22 LED23 LED24 LED25 XXX */
+	{-1,     1,    2,    3,    4,  -1,   20,    27,   34,   41,    55,   62,   69,   76,   90,  104,  111,  118,  125,  120,  126,   -1,  141, 142,   143,  144, -1}
+};
+
 static keyboard_layout layout_eu_mk750 = {
 	/*
 	ESC   F1    F2    F3    F4    XXX   F5    F6    F7    F8    XXX   F9    F10   F11   F12   PRN   SCL   PAU   MUT   PLA   REW   FWD   */
